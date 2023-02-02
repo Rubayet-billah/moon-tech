@@ -4,6 +4,7 @@ export const initialState = {
   loading: false,
   products: [],
   error: "",
+  cart: [],
 };
 
 export const productReducer = (state, action) => {
@@ -18,13 +19,18 @@ export const productReducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        products: action.payload.products,
+        products: action.payload,
       };
     case actionTypes.FETCHINH_ERROR:
       return {
         ...state,
         loading: false,
-        error: action.payload.error,
+        error: action.payload,
+      };
+    case actionTypes.ADD_TO_CART:
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
       };
 
     default:

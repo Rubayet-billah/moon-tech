@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect } from "react";
 import { useReducer } from "react";
 import { useContext } from "react";
 import { initialState, productReducer } from "../productReducers";
@@ -15,16 +15,20 @@ const ProductProvider = ({ children }) => {
       .then((data) => {
         dispatch({
           type: actionTypes.FETCHINH_SUCCESS,
-          payload: { products: data },
+          payload: data,
         });
       })
       .catch((err) =>
-        dispatch({ type: actionTypes.FETCHINH_ERROR, payload: { error: err } })
+        dispatch({
+          type: actionTypes.FETCHINH_ERROR,
+          payload: err,
+        })
       );
   }, []);
 
   const values = {
     state,
+    dispatch,
     abc: "abc",
   };
   return (
